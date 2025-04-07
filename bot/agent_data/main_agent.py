@@ -32,7 +32,7 @@ image_url = "https://i.pinimg.com/736x/4e/9a/03/4e9a031c196ed3335f5f4a9b3b277950
 
 audit_agent = Agent(
     name="Audit Agent",
-    model="gpt-4o",   
+    model="gpt-4o-mini",   
     handoffs=[ad_check_agent, compliance_report_agent],
     instructions="""
     You are an audit coordinator that manages the process of checking advertisement compliance.
