@@ -2,8 +2,8 @@ from agents import Agent, InputGuardrail, GuardrailFunctionOutput, Runner, set_d
 from pydantic import BaseModel, Field
 import asyncio
 from typing import List, Optional
-from report_agent import compliance_report_agent
-from image_analyzer import ad_check_agent
+from .report_agent import compliance_report_agent
+from .image_analyzer import ad_check_agent
 import os
 from dotenv import load_dotenv
 
@@ -20,15 +20,7 @@ if not api_key:
 # Set the default OpenAI API key
 set_default_openai_key(api_key)
 
-requirements_description = """
-Outdoor Advertising Requirements (Café Front Window)
-1. The café name must be placed at the top of the façade, centered, and written in the brand's signature font style.
-2. The menu must be placed on the left side of the window, clearly legible and styled with good contrast.
-3. The interior visible through the window must appear tidy and visually appealing.
-4. The window must include a promotional poster or special offer displayed at the bottom-right corner of the window.
-5. The street name sign must not appear on the shopfront or façade below the second floor.
-"""
-image_url = "https://i.pinimg.com/736x/4e/9a/03/4e9a031c196ed3335f5f4a9b3b277950.jpg"
+
 
 audit_agent = Agent(
     name="Audit Agent",
@@ -50,6 +42,17 @@ audit_agent = Agent(
 
 async def main():
     try:
+
+        requirements_description = """
+            Outdoor Advertising Requirements (Café Front Window)
+            1. The café name must be placed at the top of the façade, centered, and written in the brand's signature font style.
+            2. The menu must be placed on the left side of the window, clearly legible and styled with good contrast.
+            3. The interior visible through the window must appear tidy and visually appealing.
+            4. The window must include a promotional poster or special offer displayed at the bottom-right corner of the window.
+            5. The street name sign must not appear on the shopfront or façade below the second floor.
+            """
+        image_url = "https://i.pinimg.com/736x/4e/9a/03/4e9a031c196ed3335f5f4a9b3b277950.jpg"   
+
         # First run: Check the advertisement
         input_text = f"""
         Please analyze this advertisement image against the following requirements:
